@@ -1,41 +1,54 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte'
+	// utils
 	import spinner from 'assets/icons/90-ring.svg'
-	type Severity = 'primary' | 'danger' | 'secondary'
+	// types
+	import type { Severity } from 'types/Button'
+
+	const dispatch = createEventDispatcher()
 
 	export let icon: string = ''
-	export let label: string = ''
 	export let text: boolean = false
 	export let loading: boolean = false
 	export let outlined: boolean = false
 	export let disabled: boolean = false
+	export let label: string | number = ''
 	export let severity: Severity = 'primary'
 
 	let severities = {
+		warn: '#ff9e13',
 		danger: '#ff4c6a',
 		primary: '#2196f3',
+		success: '#06d612',
 		secondary: '#64748b'
 	} as Record<Severity, string>
+
+	function onClick(event: Event) {
+		if (loading) return
+		dispatch('click', event)
+	}
 </script>
 
 <button
 	{disabled}
 	class:text
 	class:outlined
+	on:click={onClick}
 	style="--color: {severities[severity]}"
-	class:iconOnly={icon.length && !label.length}
-	on:click
+	class:iconOnly={icon.length && !String(label).length}
 >
 	{#if icon}
-		<img
-			class="icon"
+		<i
+			class={`icon ${icon}`}
 			style="--visibility: {loading ? 'hidden' : 'visible'}"
-			src={icon}
-			alt="button icon"
 		/>
 	{/if}
 
 	{#if label}
-		<span class="label" style="--visibility: {loading ? 'hidden' : 'visible'}">{label}</span>
+		<span
+			class="label"
+			style="--visibility: {loading ? 'hidden' : 'visible'}">{label}</span
+		>
 	{/if}
 
 	{#if loading}
@@ -87,6 +100,7 @@
 	}
 
 	button .icon {
+		font-size: 1.3rem;
 		visibility: var(--visibility);
 	}
 

@@ -4,5 +4,5 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
 	},
-	"cSpell.words": ["hejam", "jalaliday"]
+	"cSpell.words": ["fontawesome", "fortawesome", "hejam", "jalaliday"]
 }
