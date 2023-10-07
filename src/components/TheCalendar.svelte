@@ -8,9 +8,9 @@
 	} from '$lib/utils'
 	// components
 	import Button from './Button.svelte'
+	import AppTooltip from './AppTooltip.svelte'
 	// types
 	import type { Severity } from 'types/Button'
-	import AppTooltip from './AppTooltip.svelte'
 
 	type Day = { dayNum: number; date: string; severity: Severity }
 
@@ -35,12 +35,16 @@
 
 	function nextMonth() {
 		const jDate = JDayjs(fromDate).add(1, 'month').format(dateFormat)
+		if (Number(jDate.slice(0, 4)) !== 1402) return
+
 		fromDate = dayjs(jDate).format(dateFormat)
 		setWeeks()
 	}
 
 	function previousMonth() {
 		const jDate = JDayjs(fromDate).subtract(1, 'month').format(dateFormat)
+		if (Number(jDate.slice(0, 4)) !== 1402) return
+
 		fromDate = dayjs(jDate).format(dateFormat)
 		setWeeks()
 	}
@@ -113,7 +117,7 @@
 	})
 </script>
 
-<div class="wrapper">
+<div class="__wrapper">
 	<div class="flex items-center justify-between">
 		<Button
 			text
@@ -161,13 +165,14 @@
 </div>
 
 <style>
-	.wrapper {
+	.__wrapper {
 		max-width: 23.4rem;
-		margin-bottom: 4px;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
 	}
 
 	.__calendar {
-		@apply flex flex-wrap;
+		@apply grid grid-cols-7;
 	}
 
 	.__calendar div {

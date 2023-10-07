@@ -31,13 +31,13 @@
 	</label>
 
 	<nav class="navbar">
-		<a href="#" class="nav-item" style="--i: 0">صفحه اصلی</a>
-		<a href="#" class="nav-item" style="--i: 1">بلاگ</a>
+		<a href="/" class="nav-item" style="--i: 0">صفحه اصلی</a>
+		<!-- <a href="#" class="nav-item" style="--i: 1">بلاگ</a> -->
 	</nav>
 
 	<nav />
 
-	<a href="#">
+	<a href="/">
 		<img src={logo} alt="logo" class="logo" />
 	</a>
 </header>
